@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CasaTech - Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Usa el mismo archivo CSS que Home -->
+    <style>
+        .category-btn {
+            width: 60%;
+            margin: 20px auto;
+            display: block;
+            padding: 10px;
+            background-color: #23407b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer; /* Asegura que el cursor cambie para indicar que es interactivo */
+        }
+
+        .article-section {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .article-navigation button {
+            background-color: #23407b;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .article-content {
+            flex: 1;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            
+            <div class="titulo" onclick="window.location.href='Index.html'">CasaTech</div>
+            <div class="logo">
+                <img src="img-logotipo-2.png" alt="Logotipo" onclick="window.location.href='Index.html'">
+            </div>
+            <div class="busqueda">
+                <input type="text" placeholder="Buscar..." />
+            </div>
+            <button class="login-btn" id="loginButton">Iniciar Sesión</button> <!-- Botón de inicio de sesión -->
+        </div>
+        <div class="menu">
+            <button onclick="window.location.href='Productos.html'">Productos</button>
+            <button onclick="window.location.href='Blog.html'">Blog</button>
+            <button onclick="window.location.href='Contacto.html'">Contacto</button>
+            <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>
+            
+            <button class="carrito" id="cartButton">
+                <img src="img-wired-outline-146-trolley-hover-jump-1.png" alt="Carrito">
+            </button>
+        </div>
+    </header>
+<!-- Formulario de inicio de sesión -->
+<div class="login-form" id="loginForm">
+    <input type="email" placeholder="Correo electrónico" />
+    <input type="password" placeholder="Contraseña" />
+    <button id="acceptLogin">Aceptar</button>
+</div>
+
+<!-- Formulario del carrito -->
+<div class="cart-form" id="cartForm">
+    <h3>Lista:</h3>
+    <div class="cart-item">Producto 1 <span>$10</span></div>
+    <div class="cart-item">Producto 2 <span>$15</span></div>
+    <div class="total">Total: $25</div>
+    <button id="acceptCart">Aceptar</button>
+</div>
+    <main>
+        <h1 style="text-align: left; margin-left: 20px;">Blog</h1>
+        <section>
+            <button class="category-btn">Categoría</button>
+        </section>
+        <section class="article-section">
+            <button id="prevArticle" class="article-navigation">&lt;</button>
+            <div id="articleContent" class="article-content">
+                <h2>Artículo Reciente</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel semper libero.</p>
+            </div>
+            <button id="nextArticle" class="article-navigation">&gt;</button>
+        </section>
+        <section id="commentSection" style="text-align: center; margin-top: 20px;">
+            <h3>Comentarios del artículo</h3>
+            <p>Comentario: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit nisl non lorem hendrerit, quis tincidunt tortor accumsan.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <div class="socials">
+                <i class="fab fa-youtube" onclick="window.location.href='https://www.youtube.com'"></i>
+                <i class="fab fa-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
+                <i class="fab fa-facebook" onclick="window.location.href='https://www.facebook.com'"></i>
+                <i class="fab fa-x" onclick="window.location.href='https://x.com'"></i>
+            </div>
+            <div class="contact-info">
+                Dirección de la empresa: Calle Falsa 123, Ciudad, País
+            </div>
+            <div class="contact-info">
+                Teléfono: +123 456 7890
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div style="font-weight: bold;" onclick="window.location.href='index.html'">CasaTech</div>
+            <div class="menu-footer">
+                <button onclick="window.location.href='Productos.html'">Productos</button>
+                <button onclick="window.location.href='Blog.html'">Blog</button>
+                <button onclick="window.location.href='Contacto.html'">Contacto</button>
+                <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>
+            </div>
+        </div>
+        <div class="footer-right">
+            <img src="img-captura-de-pantalla-2024-10-12-180901-1.png" alt="Imagen del Footer" class="footer-image">
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los artículos y comentarios
+        const articles = [
+            { title: 'Artículo Reciente 1', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel semper libero.', comments: 'Comentario sobre el artículo 1: Lorem ipsum dolor sit amet, consectetur.' },
+            { title: 'Artículo Reciente 2', content: 'Suspendisse potenti. Sed at dui ac mi convallis fermentum.', comments: 'Comentario sobre el artículo 2: Donec sit amet ipsum sit amet lorem pharetra vehicula.' },
+            { title: 'Artículo Reciente 3', content: 'Aenean vehicula ligula nec orci laoreet, sit amet sagittis mauris tristique.', comments: 'Comentario sobre el artículo 3: Phasellus bibendum orci non est tempus vestibulum.' }
+        ];
+        let currentArticleIndex = 0;
+
+        function updateArticle() {
+            const article = articles[currentArticleIndex];
+            document.getElementById('articleContent').innerHTML = `<h2>${article.title}</h2><p>${article.content}</p>`;
+            document.getElementById('commentSection').innerHTML = `<h3>Comentarios del artículo</h3><p>${article.comments}</p>`;
+        }
+
+        // Navegar entre artículos
+        document.getElementById('prevArticle').onclick = function () {
+            currentArticleIndex = (currentArticleIndex - 1 + articles.length) % articles.length;
+            updateArticle();
+        };
+
+        document.getElementById('nextArticle').onclick = function () {
+            currentArticleIndex = (currentArticleIndex + 1) % articles.length;
+            updateArticle();
+        };
+
+        // Inicializar el primer artículo
+        updateArticle();
+
+            // Muestra el formulario de inicio de sesión
+            document.getElementById('loginButton').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('cartForm').style.display = 'none'; // Oculta el formulario del carrito al abrir el de inicio de sesión
+        };
+
+        // Muestra el formulario del carrito
+        document.getElementById('cartButton').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('loginForm').style.display = 'none'; // Oculta el formulario de inicio de sesión al abrir el del carrito
+        };
+
+        // Cerrar formularios al hacer clic en aceptar
+        document.getElementById('acceptLogin').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = 'none'; // Oculta el formulario de inicio de sesión
+        };
+
+        document.getElementById('acceptCart').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = 'none'; // Oculta el formulario del carrito
+        };
+    </script>
+</body>
+</html>

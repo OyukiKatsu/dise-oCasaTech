@@ -1,0 +1,335 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column; /* Cambiado a columna para incluir ambos bloques */
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .titulo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 10px; /* Espacio entre el título y el logotipo */
+        }
+
+        .logo img {
+            width: 50px; /* Ajusta el tamaño del logotipo */
+            height: 50px; /* Ajusta el tamaño del logotipo */
+        }
+
+        .busqueda {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            margin: 0 20px;
+        }
+
+        .busqueda input {
+            width: 50%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center; /* Centra el texto en el input */
+        }
+
+        .login-btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px; /* Añadido margen para separar del input */
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para el menú de navegación */
+        .menu {
+            background-color: #23407b; /* Color del fondo */
+            padding: 10px 0; /* Espaciado vertical */
+            display: flex;
+            justify-content: center; /* Centra los botones del menú */
+            position: relative; /* Para posicionar el carrito */
+        }
+
+        .menu button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px; /* Espaciado entre botones */
+        }
+
+        .menu button:hover {
+            background-color: #1a2d61; /* Color de fondo al pasar el ratón */
+        }
+
+        .carrito {
+            position: absolute; /* Posiciona el botón del carrito */
+            right: 20px; /* Espacio desde la derecha */
+            top: 50%; /* Centrado verticalmente */
+            transform: translateY(-50%); /* Ajuste del centrado */
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carrito img {
+            width: 30px; /* Tamaño del icono del carrito */
+            height: 30px; /* Tamaño del icono del carrito */
+        }
+
+        /* Estilos para el formulario de inicio de sesión */
+        .login-form {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 70px; /* Debajo del header */
+            right: 20px; /* Espacio desde la derecha */
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10; /* Asegura que esté por encima de otros elementos */
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-form button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Botón ocupa todo el ancho */
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para el carrito */
+        .cart-form {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 70px; /* Debajo del header */
+            right: 20px; /* Espacio desde la derecha */
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10; /* Asegura que esté por encima de otros elementos */
+        }
+
+        .cart-form h3 {
+            margin: 0 0 10px; /* Espacio entre el título y la lista */
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el producto y el precio */
+            margin: 5px 0; /* Espacio entre elementos de la lista */
+        }
+
+        .total {
+            font-weight: bold; /* Negrita para el total */
+            margin: 10px 0; /* Espacio entre el total y el botón */
+        }
+
+        .cart-form button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Botón ocupa todo el ancho */
+        }
+
+        .cart-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para el cuerpo de la página */
+        .secciones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .seccion {
+            width: 300px; /* Ancho de cada sección */
+            height: 300px; /* Altura de cada sección */
+            margin: 10px; /* Espaciado entre secciones */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column; /* Para apilar título y descripción */
+            justify-content: space-between; /* Espaciado entre título y descripción */
+        }
+
+        .seccion h2 {
+            margin: 0; /* Sin margen */
+        }
+
+        .seccion p {
+            margin: 10px 0 0; /* Margen superior */
+            flex-grow: 1; /* Para que ocupe el espacio disponible */
+        }
+
+        /* Estilos para el footer */
+        footer {
+            display: flex;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ccc;
+            width: 100%; /* Asegura que el footer ocupe todo el ancho */
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column; /* Coloca los elementos en columna */
+            width: 50%; /* Toma el 50% del ancho */
+            padding-right: 20px; /* Espacio a la derecha para la separación */
+        }
+
+        .footer-middle {
+            display: flex;
+            flex-direction: column; /* Coloca los elementos en columna */
+            width: 50%; /* Toma el 50% del ancho */
+            padding-left: 10px; /* Ajustar para alejar más a la izquierda */
+            padding-right: 10px; /* Espacio a los lados */
+            align-items: flex-start; /* Alinear a la izquierda */
+        }
+
+        .footer-right {
+            width: 50%; /* Toma el 50% del ancho */
+        }
+
+        .socials {
+            display: flex;
+            justify-content: flex-start; /* Alineación a la izquierda */
+            margin-bottom: 10px; /* Espacio debajo de los iconos */
+        }
+
+        .socials i {
+            font-size: 24px;
+            margin-right: 15px; /* Espacio entre iconos */
+        }
+
+        .menu-footer {
+            display: flex;
+            flex-direction: column; /* Apilar botones en columna */
+            margin: 10px 0; /* Espacio vertical */
+            align-items: flex-start; /* Aliniar a la izquierda */
+        }
+
+        .menu-footer button {
+            background: none;
+            border: none;
+            color: #000;
+            cursor: pointer;
+            padding: 5px 0; /* Espacio entre los botones */
+        }
+
+        .menu-footer button:hover {
+            text-decoration: underline; /* Subraya al pasar el ratón */
+        }
+
+        .footer-image {
+            width: 100%; /* Imagen ocupa todo el segmento */
+            height: auto; /* Mantiene proporción */
+        }
+
+        .category-btn {
+            width: 60%;
+            margin: 0 auto;
+            display: block;
+            padding: 10px;
+            background-color: #23407b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .article-section {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .article-navigation button {
+            background-color: #23407b;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .article-content {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .secciones {
+                flex-direction: column; /* Secciones en columna en móviles */
+                align-items: center; /* Centra las secciones */
+            }
+
+            .seccion {
+                width: 90%; /* Ancho en móviles */
+            }
+
+            footer {
+                flex-direction: column; /* Columnas en móviles */
+                align-items: center; /* Centra los elementos */
+            }
+
+            .footer-left,
+            .footer-middle,
+            .footer-right {
+                width: 100%; /* Toma todo el ancho en móviles */
+                margin: 5px 0; /* Espacio entre columnas */
+            }
+        }

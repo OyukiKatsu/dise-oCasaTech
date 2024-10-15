@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CasaTech - Productos</title>
+    <link rel="stylesheet" href="style.css"> <!-- Reutiliza el archivo CSS de las demás páginas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Estilos para la página de productos */
+        body {
+            background-color: white; /* Fondo blanco */
+        }
+
+        .product-section {
+            width: 80%;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .products-page {
+            display: none; /* Ocultar todas las páginas por defecto */
+            opacity: 0; /* Inicialmente transparente */
+            transition: opacity 0.5s ease; /* Transición de opacidad */
+        }
+
+        .active {
+            display: block; /* Mostrar solo la página activa */
+            opacity: 1; /* Totalmente opaca */
+        }
+
+        .product-row {
+            display: flex; /* Para mostrar productos en filas */
+            flex-wrap: wrap; /* Permitir que los productos se envuelvan */
+            justify-content: space-between; /* Espacio entre los productos */
+            margin-bottom: 20px; /* Espacio entre filas */
+        }
+
+        .product-item {
+            box-sizing: border-box;
+            padding: 10px; /* Espaciado interno */
+            margin: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 30%; /* Ancho del 30% para permitir 3 en la fila */
+            display: flex;
+            flex-direction: column; /* Para apilar el contenido */
+            align-items: center; /* Centrar el contenido horizontalmente */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+        }
+
+        .product-item div {
+            background-color: #808080; /* Fondo gris oscuro para las imágenes */
+            width: 100%;
+            height: 200px; /* Altura fija para mantener consistencia */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            border-radius: 5px; /* Bordes redondeados */
+            margin-bottom: 10px; /* Espacio entre la imagen y el precio */
+        }
+
+        .product-item .price {
+            margin: 5px 0; /* Espaciado entre precio y el botón */
+            font-weight: bold;
+            font-size: 16px; /* Tamaño del texto del precio */
+            width: 100%; /* Ancho del recuadro del precio */
+            height: 10%;
+            padding: 5px; /* Relleno interno */
+            background-color: #ffffff; /* Fondo gris claro para el precio */
+            border-radius: 5px; /* Bordes redondeados */
+            text-align: center; /* Centrado del texto */
+        }
+
+        .product-item button {
+            padding: 10px;
+            background-color: #23407b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Indicadores de página */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid black; /* Borde negro para los puntos */
+            cursor: pointer;
+        }
+
+        .pagination .active {
+            background-color: black;
+        }
+
+        /* Estilos para el pop-up */
+        .popup {
+            display: none; /* Ocultar por defecto */
+            position: fixed; /* Posición fija */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
+            justify-content: center; /* Centrar contenido */
+            align-items: center; /* Centrar contenido verticalmente */
+            z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+        }
+
+        .popup-content {
+            background-color: white; /* Fondo blanco para el contenido del pop-up */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 20px;
+            width: 600px; /* Ancho del pop-up */
+            max-height: 80%;
+            overflow-y: auto; /* Desplazamiento vertical si es necesario */
+            display: flex; /* Para el layout */
+        }
+
+        .popup-images {
+            flex: 1; /* Ocupa el espacio disponible */
+            display: flex;
+            flex-direction: column; /* Para apilar imágenes */
+            align-items: center; /* Centrar imágenes horizontalmente */
+        }
+
+        .popup-images img {
+            width: 100%; /* Ancho completo */
+            max-height: 200px; /* Altura máxima de imagen */
+            object-fit: cover; /* Para cubrir el contenedor */
+            margin-bottom: 10px; /* Espacio entre imágenes */
+        }
+
+        .popup-details {
+            flex: 1; /* Ocupa el espacio disponible */
+            padding-left: 20px; /* Espacio entre imágenes y detalles */
+        }
+
+        .popup-details h2 {
+            margin-top: 0; /* Sin margen superior */
+        }
+
+        .close-popup {
+            cursor: pointer;
+            position: absolute; /* Posición absoluta para el botón de cerrar */
+            top: 10px;
+            right: 10px;
+            font-size: 20px; /* Tamaño del texto */
+            background: none; /* Sin fondo */
+            border: none; /* Sin borde */
+            color: black; /* Color del texto */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            
+            <div class="titulo" onclick="window.location.href='Index.html'">CasaTech</div>
+            <div class="logo">
+                <img src="img-logotipo-2.png" alt="Logotipo" onclick="window.location.href='Index.html'">
+            </div>
+            <div class="busqueda">
+                <input type="text" placeholder="Buscar..." />
+            </div>
+            <button class="login-btn" id="loginButton">Iniciar Sesión</button> <!-- Botón de inicio de sesión -->
+        </div>
+        <div class="menu">
+            <button onclick="window.location.href='Productos.html'">Productos</button>
+            <button onclick="window.location.href='Blog.html'">Blog</button>
+            <button onclick="window.location.href='Contacto.html'">Contacto</button>
+            <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>
+            
+            <button class="carrito" id="cartButton">
+                <img src="img-wired-outline-146-trolley-hover-jump-1.png" alt="Carrito">
+            </button>
+        </div>
+    </header>
+<!-- Formulario de inicio de sesión -->
+<div class="login-form" id="loginForm">
+    <input type="email" placeholder="Correo electrónico" />
+    <input type="password" placeholder="Contraseña" />
+    <button id="acceptLogin">Aceptar</button>
+</div>
+
+<!-- Formulario del carrito -->
+<div class="cart-form" id="cartForm">
+    <h3>Lista:</h3>
+    <div class="cart-item">Producto 1 <span>$10</span></div>
+    <div class="cart-item">Producto 2 <span>$15</span></div>
+    <div class="total">Total: $25</div>
+    <button id="acceptCart">Aceptar</button>
+</div>
+    <main>
+        <h1 style="text-align: left; margin-left: 20px;">Productos:</h1>
+        <section class="product-section">
+            <!-- Página 1 -->
+            <div class="products-page active" id="page1">
+                <div class="product-row">
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 1', ['demo1.png'], 'Descripción del producto 1.')">Demo 1</div>
+                        <div class="price">$50.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 2', ['img/demo2.1.jpg'], 'Descripción del producto 2.')">Demo 2</div>
+                        <div class="price">$30.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 3', ['img/demo3.1.jpg'], 'Descripción del producto 3.')">Demo 3</div>
+                        <div class="price">$20.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 4', ['img/demo4.1.jpg'], 'Descripción del producto 4.')">Demo 4</div>
+                        <div class="price">$40.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 5', ['img/demo5.1.jpg'], 'Descripción del producto 5.')">Demo 5</div>
+                        <div class="price">$25.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 6', ['img/demo6.1.jpg'], 'Descripción del producto 6.')">Demo 6</div>
+                        <div class="price">$35.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página 2 -->
+            <div class="products-page" id="page2">
+                <div class="product-row">
+                    <div class="product-item" >
+                        <div onclick="openPopup('Demo 7', ['img/demo7.1.jpg'], 'Descripción del producto 7.')">Demo 7</div>
+                        <div class="price">$60.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 8', ['img/demo8.1.jpg'], 'Descripción del producto 8.')">Demo 8</div>
+                        <div class="price">$45.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 9', ['img/demo9.1.jpg'], 'Descripción del producto 9.')">Demo 9</div>
+                        <div class="price">$55.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 10', ['img/demo10.1.jpg'], 'Descripción del producto 10.')">Demo 10</div>
+                        <div class="price">$70.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 11', ['img/demo11.1.jpg'], 'Descripción del producto 11.')">Demo 11</div>
+                        <div class="price">$30.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 12', ['img/demo12.1.jpg'], 'Descripción del producto 12.')">Demo 12</div>
+                        <div class="price">$50.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página 3 -->
+            <div class="products-page" id="page3">
+                <div class="product-row">
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 13', ['img/demo13.1.jpg'], 'Descripción del producto 13.')">Demo 13</div>
+                        <div class="price">$60.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 14', ['img/demo14.1.jpg'], 'Descripción del producto 14.')">Demo 14</div>
+                        <div class="price">$80.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 15', ['img/demo15.1.jpg'], 'Descripción del producto 15.')">Demo 15</div>
+                        <div class="price">$90.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 16', ['img/demo16.1.jpg'], 'Descripción del producto 16.')">Demo 16</div>
+                        <div class="price">$70.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 17', ['img/demo17.1.jpg'], 'Descripción del producto 17.')">Demo 17</div>
+                        <div class="price">$50.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                    <div class="product-item">
+                        <div onclick="openPopup('Demo 18', ['img/demo18.1.jpg'], 'Descripción del producto 18.')">Demo 18</div>
+                        <div class="price">$30.00</div>
+                        <button>Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indicadores de página -->
+            <div class="pagination">
+                <span onclick="changePage(1)" class="active"></span>
+                <span onclick="changePage(2)"></span>
+                <span onclick="changePage(3)"></span>
+            </div>
+        </section>
+
+        <!-- Pop-up -->
+        <div class="popup" id="productPopup" onclick="closePopup(event)">
+            <div class="popup-content">
+                <button class="close-popup" onclick="closePopup(event)">✖</button>
+                <div class="popup-images" id="popupImages"></div>
+                <div class="popup-details">
+                    <h2 id="popupTitle">Título del Producto</h2>
+                    <p id="popupDescription">Descripción detallada del producto.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <div class="socials">
+                <i class="fab fa-youtube" onclick="window.location.href='https://www.youtube.com'"></i>
+                <i class="fab fa-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
+                <i class="fab fa-facebook" onclick="window.location.href='https://www.facebook.com'"></i>
+                <i class="fab fa-x" onclick="window.location.href='https://x.com'"></i>
+            </div>
+            <div class="contact-info">
+                Dirección de la empresa: Calle Falsa 123, Ciudad, País
+            </div>
+            <div class="contact-info">
+                Teléfono: +123 456 7890
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div style="font-weight: bold;" onclick="window.location.href='index.html'">CasaTech</div>
+            <div class="menu-footer">
+            <button onclick="window.location.href='Productos.html'">Productos</button>
+            <button onclick="window.location.href='Blog.html'">Blog</button>
+            <button onclick="window.location.href='Contacto.html'">Contacto</button>
+            <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>
+            </div>
+        </div>
+        <div class="footer-right">
+            <img src="img-captura-de-pantalla-2024-10-12-180901-1.png" alt="Imagen del Footer" class="footer-image">
+        </div>
+    </footer>
+
+    <script>
+        let currentPage = 1; // Página inicial (1, 2, 3)
+        const totalPages = 3; // Total de páginas
+
+        function changePage(pageIndex) {
+            if (pageIndex >= 1 && pageIndex <= totalPages) {
+                const pages = document.querySelectorAll(".products-page");
+                
+                // Desvanecer la página activa
+                const activePage = document.getElementById("page" + currentPage);
+                activePage.style.opacity = 0; // Comienza a desvanecerse
+                
+                // Esperar a que termine la animación
+                setTimeout(() => {
+                    // Ocultar todas las páginas
+                    pages.forEach(page => {
+                        page.classList.remove("active");
+                        page.style.opacity = 0; // Asegurar que todas tengan opacidad 0
+                    });
+
+                    // Mostrar la nueva página
+                    const newPage = document.getElementById("page" + pageIndex);
+                    newPage.classList.add("active");
+                    newPage.style.opacity = 1; // Hacerla completamente opaca
+                }, 500); // Tiempo de espera igual al tiempo de desvanecimiento
+
+                // Actualizar indicadores de paginación
+                updatePagination(pageIndex);
+                currentPage = pageIndex;
+            }
+        }
+
+        function updatePagination(pageIndex) {
+            const paginationDots = document.querySelectorAll(".pagination span");
+            paginationDots.forEach((dot, index) => {
+                if (index + 1 === pageIndex) {
+                    dot.classList.add("active");
+                } else {
+                    dot.classList.remove("active");
+                }
+            });
+        }
+
+        function openPopup(title, image, description) {
+            document.getElementById('popupTitle').innerText = title;
+            document.getElementById('popupDescription').innerHTML = description;
+
+            const popupImages = document.getElementById('popupImages');
+            popupImages.innerHTML = ''; // Clear previous content
+
+            // Create an image element for the clicked product's image
+            const imgElement = document.createElement('img');
+            imgElement.src = image; // Use the clicked image URL
+            popupImages.appendChild(imgElement);
+
+            document.getElementById('productPopup').style.display = 'flex'; // Show the pop-up
+        }
+
+
+        function closePopup(event) {
+            if (event.target === document.getElementById('productPopup') || event.target.classList.contains('close-popup')) {
+                document.getElementById('productPopup').style.display = 'none'; // Ocultar el pop-up
+            }
+        }
+
+        // Muestra el formulario de inicio de sesión
+        document.getElementById('loginButton').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('cartForm').style.display = 'none'; // Oculta el formulario del carrito al abrir el de inicio de sesión
+        };
+
+        // Muestra el formulario del carrito
+        document.getElementById('cartButton').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('loginForm').style.display = 'none'; // Oculta el formulario de inicio de sesión al abrir el del carrito
+        };
+
+        // Cerrar formularios al hacer clic en aceptar
+        document.getElementById('acceptLogin').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = 'none'; // Oculta el formulario de inicio de sesión
+        };
+
+        document.getElementById('acceptCart').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = 'none'; // Oculta el formulario del carrito
+        };
+    </script>
+</body>
+</html>

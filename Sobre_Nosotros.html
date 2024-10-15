@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CasaTech - Sobre Nosotros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Usa el mismo archivo CSS que Home -->
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            
+            <div class="titulo" onclick="window.location.href='Index.html'">CasaTech</div>
+            <div class="logo">
+                <img src="img-logotipo-2.png" alt="Logotipo" onclick="window.location.href='Index.html'">
+            </div>
+            <div class="busqueda">
+                <input type="text" placeholder="Buscar..." />
+            </div>
+            <button class="login-btn" id="loginButton">Iniciar Sesión</button> <!-- Botón de inicio de sesión -->
+        </div>
+        <div class="menu">
+            <button onclick="window.location.href='Productos.html'">Productos</button>
+            <button onclick="window.location.href='Blog.html'">Blog</button>
+            <button onclick="window.location.href='Contacto.html'">Contacto</button>
+            <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>
+            
+            <button class="carrito" id="cartButton">
+                <img src="img-wired-outline-146-trolley-hover-jump-1.png" alt="Carrito">
+            </button>
+        </div>
+    </header>
+
+    <!-- Formulario de inicio de sesión -->
+    <div class="login-form" id="loginForm">
+        <input type="email" placeholder="Correo electrónico" />
+        <input type="password" placeholder="Contraseña" />
+        <button id="acceptLogin">Aceptar</button>
+    </div>
+
+    <!-- Formulario del carrito -->
+    <div class="cart-form" id="cartForm">
+        <h3>Lista:</h3>
+        <div class="cart-item">Producto 1 <span>$10</span></div>
+        <div class="cart-item">Producto 2 <span>$15</span></div>
+        <div class="total">Total: $25</div>
+        <button id="acceptCart">Aceptar</button>
+    </div>
+
+    <main>
+        <h1 style="text-align: left; margin-left: 20px;">Sobre Nosotros</h1>
+        <section style="text-align: center; margin: 20px 0;">
+            <h2>Introducción</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur libero, sed dapibus libero. Proin vitae sapien nec ligula cursus vulputate vel id dui. Aenean et ultricies eros. Suspendisse facilisis, nunc id facilisis aliquam, nisi erat ultrices libero, nec luctus ligula nisi a enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur libero, sed dapibus libero. Proin vitae sapien nec ligula cursus vulputate vel id dui. Aenean et ultricies eros. Suspendisse facilisis, nunc id facilisis aliquam, nisi erat ultrices libero, nec luctus ligula nisi a enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur libero, sed dapibus libero. Proin vitae sapien nec ligula cursus vulputate vel id dui. Aenean et ultricies eros. Suspendisse facilisis, nunc id facilisis aliquam, nisi erat ultrices libero, nec luctus ligula nisi a enim.</p>
+        </section>
+        <section style="text-align: center; margin: 20px 0;">
+            <h2>Misión y Visión</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque vehicula dolor eget ex eleifend, eget efficitur arcu bibendum. Curabitur non eros et eros bibendum congue ac eget nulla.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur libero, sed dapibus libero. Proin vitae sapien nec ligula cursus vulputate vel id dui. Aenean et ultricies eros. Suspendisse facilisis, nunc id facilisis aliquam, nisi erat ultrices libero, nec luctus ligula nisi a enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur libero, sed dapibus libero. Proin vitae sapien nec ligula cursus vulputate vel id dui. Aenean et ultricies eros. Suspendisse facilisis, nunc id facilisis aliquam, nisi erat ultrices libero, nec luctus ligula nisi a enim.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <div class="socials">
+                <i class="fab fa-youtube" onclick="window.location.href='https://www.youtube.com'"></i>
+                <i class="fab fa-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
+                <i class="fab fa-facebook" onclick="window.location.href='https://www.facebook.com'"></i>
+                <i class="fab fa-x" onclick="window.location.href='https://x.com'"></i>
+            </div>
+            <div class="contact-info">
+                Dirección de la empresa: Calle Falsa 123, Ciudad, País
+            </div>
+            <div class="contact-info">
+                Teléfono: +123 456 7890
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div style="font-weight: bold;" onclick="window.location.href='index.html'">CasaTech</div>
+            <div class="menu-footer">
+                <button onclick="window.location.href='Productos.html'">Productos</button>
+                <button onclick="window.location.href='Blog.html'">Blog</button>
+                <button onclick="window.location.href='Contacto.html'">Contacto</button>
+                <button onclick="window.location.href='Sobre_Nosotros.html'">Sobre Nosotros</button>            </div>
+        </div>
+        <div class="footer-right">
+            <img src="img-captura-de-pantalla-2024-10-12-180901-1.png" alt="Imagen del Footer" class="footer-image">
+        </div>
+    </footer>
+
+    <script>
+        // Muestra el formulario de inicio de sesión
+        document.getElementById('loginButton').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('cartForm').style.display = 'none'; // Oculta el formulario del carrito al abrir el de inicio de sesión
+        };
+
+        // Muestra el formulario del carrito
+        document.getElementById('cartButton').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('loginForm').style.display = 'none'; // Oculta el formulario de inicio de sesión al abrir el del carrito
+        };
+
+        // Cerrar formularios al hacer clic en aceptar
+        document.getElementById('acceptLogin').onclick = function () {
+            var form = document.getElementById('loginForm');
+            form.style.display = 'none'; // Oculta el formulario de inicio de sesión
+        };
+
+        document.getElementById('acceptCart').onclick = function () {
+            var cart = document.getElementById('cartForm');
+            cart.style.display = 'none'; // Oculta el formulario del carrito
+        };
+    </script>
+</body>
+</html>
